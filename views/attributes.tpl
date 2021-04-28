@@ -30,6 +30,7 @@
 	</div>
 	
     <!------------ FORM FOR A QUANTITATIVE ATTRIBUTE ------------>
+
 	<div id="form_quanti">
 		<div class="form-group" id="quantiname">
 			<label for="att_name_quanti">Name:</label>
@@ -121,8 +122,10 @@ function verifierCaracteres(event) {
 	}
 			
 };
-$("#quantiname").append('<input type="text" class="form-control" id="att_name_quanti" placeholder="Name" onkeypress="verifierCaracteres(event); return false;" />');
-$("#qualiname").append('<input type="text" class="form-control" id="att_name_quali" placeholder="Name" onkeypress="verifierCaracteres(event); return false;" />');
+$("#quantiname").append('<input type="text" class="form-control" id="att_name_quanti" placeholder="Name" onkeypress="verifierCaracteres(event); return false;" autocomplete="off" pattern="[a-z]{4,8}" />');
+$("#quantiname").append('<p style="font-size:10px;"> Use only alphanumerical chars (non case sensitive)</p>');
+$("#qualiname").append('<input type="text" class="form-control" id="att_name_quali" placeholder="Name" onkeypress="verifierCaracteres(event); return false;" autocomplete="off"  />');
+$("#qualiname").append('<p style="font-size:10px;"> Use only alphanumerical chars (non case sensitive)</p>');
 /////////////////////////////////////////////////////////////////////////////////////////
 // Fonctions pour ajouter/supprimer des zones de texte pour les valeurs intermédiaires //
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -374,6 +377,18 @@ $(function() {
 	}
 	sync_table();
 	/// Defines what happens when you click on the QUANTITATIVE Submit button
+
+	function verifName(currstring) {
+		/*
+		This function takes currstring (a string) as argument and return true if one char is not alphanumerical
+		*/
+        var accepted = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var strlist = currstring.split('');
+        let testtable = [];
+        strlist.forEach(element => testtable.push(accepted.includes(element)));
+        return !testtable.some((element) => element == false);
+    }
+
 	$('#submit_quanti').click(function() {
 		var name = $('#att_name_quanti').val(),
 			unit = $('#att_unit_quanti').val(),
@@ -399,8 +414,10 @@ $(function() {
 			alert ("Minimum value must be inferior to maximum value");
 		} else if (isThereUnderscore([name, unit], String(val_min), String(val_max))==false) {
 			alert("Please don't write an underscore ( _ ) in your values.\nBut you can put spaces");
+		} else if (!verifName(name)) {
+			alert("Please use only alphanumerical chars in name (non case sensitive)");
 		}
-		
+
 		else {
 			if (edit_mode==false) {
 				assess_session.attributes.push({
@@ -497,7 +514,10 @@ $(function() {
 			alert("At least one of the values is appearing more than once");
 		} else if (isThereUnderscore(val_med, val_min, val_max)==false) {
 			alert("Please don't write an underscore ( _ ) in your values.\nBut you can put spaces");
+		} else if (!verifName(name)) {
+			alert("Please use only alphanumerical chars in name (non case sensitive)");
 		}
+
 		else {
 			if (edit_mode==false) {
 				assess_session.attributes.push({
