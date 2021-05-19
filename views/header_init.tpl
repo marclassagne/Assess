@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+%include('js.tpl')
+
 <head>
 
     <meta charset="utf-8">
@@ -67,16 +69,26 @@
                     <li class="k">
                         <a href="{{ get_url('/k_calculus') }}"><i class="fa fa-fw fa-search"></i>Scaling constants</a>
                     </li>
-                    <li class="export">
-                        <a href="{{ get_url('/export') }}"><i class="fa fa-fw fa-upload"></i>Export assessment</a>
-                    </li>
                     <li class="settings">
                         <a href="{{ get_url('/settings') }}"><i class="fa fa-fw fa-cogs"></i>Settings</a>
                     </li>
                     <li class="credits">
                         <a href="{{ get_url('/credits') }}"><i class="fa fa-fw fa-users"></i>Credits</a>
                     </li>
-					
+					<li class="export">
+
+                        <script src="{{ get_url('static', path='js/export.js') }}"></script>>
+                        <style>
+                          button {
+                            background-color: #222222;
+                            color: #eeeeee;
+                            font-size: 14px;
+                            border : 0;
+                          }
+                        </style>
+                        <button type = "button" id='export_xls'><i class="fa fa-fw fa-upload"></i>Click to export all to Excel</button> 
+                    </li>
+
 				</ul>
 			</div>
             <!-- /.navbar-collapse -->
