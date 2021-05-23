@@ -5,7 +5,7 @@ import numpy as np
 import io
 from functions import *
 
-
+#show the draft (on the right) of all curves
 def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
     
     plot_all = False
@@ -135,11 +135,14 @@ def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
 
 
     ax.scatter(x1, y1, c='k', label="Original Data")
+    for index in range(len(lx)-1):
+        ax.annotate(index+1, xy=(lx[index],ly[index]),xytext=(+10,-10),textcoords='offset points',horizontalalignment='center', verticalalignment='center')
     plt.savefig(imgdata, format='svg')
     plt.close()
 
     return imgdata.getvalue()
 
+#show the draft (on the left) of single curve
 def generate_svg_plot2(dictionary, min, max, liste_cord, width, choice):
 
     # img
@@ -160,6 +163,8 @@ def generate_svg_plot2(dictionary, min, max, liste_cord, width, choice):
     plt.figure(figsize=(width, width))
     plt.axis([min, max, 0., 1.])
     plt.plot(x1, y1, 'ko', label="Original Data")
+    for index in range(len(lx)-1):
+        plt.annotate(index+1, xy=(lx[index],ly[index]),xytext=(+10,-10),textcoords='offset points',horizontalalignment='center', verticalalignment='center')
     x = np.linspace(min, max, 100)
 
     #translation suivant x des courbes a afficher en cas de valeurs negatives
