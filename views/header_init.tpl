@@ -81,7 +81,7 @@
                         <style>
                           button {
                             background-color: #222222;
-                            color: #777777;
+                            color: #eeeeee;
                             font-size: 14px;
                             border : 0;
                           }
