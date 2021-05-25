@@ -128,8 +128,8 @@
 			} else {
 				if (attribute.questionnaire.number > 0) {
 					if (attribute.questionnaire.number === attribute.val_med.length) {
-						text_table += '<td><button type="button" class="btn btn-default btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
-						text_table += '<button type="button" class="btn btn-default btn-xs" id="excel_' + i + '">export to Excel</button></td>';
+						//text_table += '<td><button type="button" class="btn btn-default btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
+						text_table += '<td><button type="button" class="btn btn-default btn-xs" id="excel_' + i + '">export to Excel</button></td>';
 					}
 					else {
 						text_table += '<td>Please assess all the medium values ';
