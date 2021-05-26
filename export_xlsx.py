@@ -11,6 +11,11 @@ from functions import *
 import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
 
+def formatGenerate(decimal):
+    s = '0.'
+    for i in range(decimal):
+        s += '0'
+    return s
 
 def generate_fichier(data):
 
@@ -20,6 +25,9 @@ def generate_fichier(data):
     classeur = xlsxwriter.Workbook('fichier' + str(r) + '.xlsx')
     # On ajoute une feuille au classeur
 
+    decimal = data['settings']['decimals_equations']
+    formatZero = formatGenerate(decimal)
+
     for monAttribut in data['attributes']:
 
         feuille = classeur.add_worksheet(monAttribut['name'])
@@ -28,7 +36,7 @@ def generate_fichier(data):
         format01.set_num_format('0.00')
 
         formatCoeff = classeur.add_format()
-        formatCoeff.set_num_format('0.000000')
+        formatCoeff.set_num_format(formatZero)
 
         formatTitre = classeur.add_format()
         formatTitre.set_bg_color('#C0C0C0')
@@ -150,7 +158,7 @@ def generate_fichier(data):
                 # s'arretera
                 feuille.write(ligne + 6, 8, parameters['r2'], formatCoeff)
                 feuille.write(
-                    ligne + 7, 8, convert_to_text(utility, parameters, "x"), formatCoeff)
+                    ligne + 7, 8, convert_to_text(utility, parameters, monAttribut['name'], data['settings']['decimals_equations']), formatCoeff)
                 feuille.write(ligne + 2, 8, parameters['a'], formatCoeff)
                 feuille.write(ligne + 3, 8, parameters['b'], formatCoeff)
                 feuille.write(ligne + 4, 8, parameters['c'], formatCoeff)
@@ -688,19 +696,19 @@ def signe(nombre):
         return str(nombre)
 
 
-def convert_to_text(function_type, data, x):
+def convert_to_text(function_type, data, x, arrondi):
     if function_type == "exp":
-        return "(" + str(round(data['a'], 8)) + "*exp(" + signe(-round(data['b'], 8)) + "*" + x + ")" + signe(round(data['c'], 8)) + ")"
+        return "(" + str(round(data['a'], arrondi)) + "*exp(" + signe(-round(data['b'], arrondi)) + "*" + x + ")" + signe(round(data['c'], arrondi)) + ")"
     elif function_type == "log":
-        return "(" + str(round(data['a'], 8)) + "*log(" + str(round(data['b'], 8)) + "*" + x + signe(round(data['c'], 8)) + ")" + signe(round(data['d'], 8)) + ")"
+        return "(" + str(round(data['a'], arrondi)) + "*log(" + str(round(data['b'], arrondi)) + "*" + x + signe(round(data['c'], arrondi)) + ")" + signe(round(data['d'], arrondi)) + ")"
     elif function_type == "pow":
-        return "(" + str(round(data['a'], 8)) + "*(pow(" + x + "," + str(round(1 - data['b'], 8)) + ")-1)/(" + str(round(1 - data['b'], 8)) + ")" + signe(round(data['c'], 8)) + ")"
+        return "(" + str(round(data['a'], arrondi)) + "*(pow(" + x + "," + str(round(1 - data['b'], arrondi)) + ")-1)/(" + str(round(1 - data['b'], arrondi)) + ")" + signe(round(data['c'], arrondi)) + ")"
     elif function_type == "quad":
-        return "(" + str(round(data['c'], 8)) + "*" + x + signe(round(-data['b'], 8)) + "*pow(" + x + ",2)" + signe(round(data['a'], 8)) + ")"
+        return "(" + str(round(data['c'], arrondi)) + "*" + x + signe(round(-data['b'], arrondi)) + "*pow(" + x + ",2)" + signe(round(data['a'], arrondi)) + ")"
     elif function_type == "lin":
-        return "(" + str(round(data['a'], 8)) + "*" + x + "+" + signe(round(data['b'], 8)) + ")"
+        return "(" + str(round(data['a'], arrondi)) + "*" + x + "+" + signe(round(data['b'], arrondi)) + ")"
     elif function_type == "expo-power":
-        return "(" + str(round(data['a'], 8)) + "+exp(" + str(round(-data['b'], 8)) + "*pow(" + x + "," + str(round(data['c'], 8)) + "))"
+        return "(" + str(round(data['a'], arrondi)) + "+exp(" + str(round(-data['b'], arrondi)) + "*pow(" + x + "," + str(round(data['c'], arrondi)) + "))"
 
 
 # utilite pour le excel
