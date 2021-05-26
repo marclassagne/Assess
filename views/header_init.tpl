@@ -81,7 +81,7 @@
                         <style>
                            .button2 {
                             background-color: #222222;
-                            color: #FFFFFF;
+                            color: #777777;
                             font-size: 14px;
                             border : 0;
                           }
