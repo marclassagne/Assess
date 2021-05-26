@@ -1071,7 +1071,7 @@ $(function(){
 			//then we go here so we can send the ajax request
 			var mesK=assess_session.k_calculus[get_Active_Method()].k.slice();
 			mesK.push({value:assess_session.k_calculus[get_Active_Method()].GK});
-			var requete={"type": "utility_calculus_multiplicative", "k":mesK, "utility":k_utility_multiplicative};
+			var requete={"type": "utility_calculus_multiplicative", "k":mesK, "utility":k_utility_multiplicative, "virgule": assess_session.settings.decimals_dpl};
 			console.log(requete);
 
 			$.post('ajax', JSON.stringify(requete), function (data) {
@@ -1106,7 +1106,7 @@ $(function(){
 				}
 			}
 
-			var requete={"type": "utility_calculus_multilinear", "k":assess_session.k_calculus[get_Active_Method()].k, "utility":k_utility_multilinear};
+			var requete={"type": "utility_calculus_multilinear", "k":assess_session.k_calculus[get_Active_Method()].k, "utility":k_utility_multilinear, "virgule": assess_session.settings.decimals_dpl};
 			$.post('ajax', JSON.stringify(requete), function (data) {
 				console.log(data);
 				
