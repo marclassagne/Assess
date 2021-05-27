@@ -69,12 +69,6 @@
                     <li class="k">
                         <a href="{{ get_url('/k_calculus') }}"><i class="fa fa-fw fa-search"></i>Scaling constants</a>
                     </li>
-                    <li class="settings">
-                        <a href="{{ get_url('/settings') }}"><i class="fa fa-fw fa-cogs"></i>Settings</a>
-                    </li>
-                    <li class="credits">
-                        <a href="{{ get_url('/credits') }}"><i class="fa fa-fw fa-users"></i>Credits</a>
-                    </li>
                     <li class="export">
 
                         <script src="{{ get_url('static', path='js/export.js') }}"></script>>
@@ -89,6 +83,13 @@
                         <button type = "button" id='export_xls' class= "button2"><i class="fa fa-fw fa-upload "></i>Export all to Excel</button>
                                             
                     </li>
+                    <li class="settings">
+                        <a href="{{ get_url('/settings') }}"><i class="fa fa-fw fa-cogs"></i>Settings</a>
+                    </li>
+                    <li class="credits">
+                        <a href="{{ get_url('/credits') }}"><i class="fa fa-fw fa-users"></i>Credits</a>
+                    </li>
+                    
 
 				</ul>
 			</div>
