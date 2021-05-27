@@ -42,6 +42,11 @@
     <li>Adnane Tebaa</li>
     <li>Etienne Verbrugghe</li>
     <li>Mohammed Zouini</li>
+    <li>Blaise Petit</li>
+    <li>Pavitra Patel</li>
+    <li>Weining Ben</li>
+    <li>Arnaud Maranges</li>
+    <li>Matthieu Moulonguet</li>
 </ul>
 
 <h2>Supervising faculty:</h2>
