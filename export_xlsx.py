@@ -12,6 +12,8 @@ import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
 
 def formatGenerate(decimal):
+#Function qui rend une chaîne de caractère de 0.00 avec le nombre de décimal
+#correspondant à l'argument decimal (entier)
     s = '0.'
     for i in range(decimal):
         s += '0'
