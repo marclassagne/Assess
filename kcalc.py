@@ -67,9 +67,14 @@ def calculk2(k1, k2):
 
 
 def utilite2(k1, k2, k, u1, u2, virgule):
+    k1 = round(k1, int(virgule))
+    k2 = round(k2, int(virgule))
+    k = round(k, int(virgule))
+    virgule = int(virgule)
 
-    U = str(round(k1, int(virgule))) + "*" + u1 + str(round(k2, int(virgule))) + "*" + u2 + \
-        str(round(k * k1 * k2, int(virgule))) + "*" + u1 + "*" + u2
+    U = str(k1) + "*" + u1 + "+"
+    U += str(k2) + "*" + u2 + "+"
+    U += str(round(k * k1 * k2, virgule)) + "*" + u1 + "*" + u2
     return (U)
 
 # ---- 3 -----
@@ -95,6 +100,7 @@ def utilite3(k1, k2, k3, k, u1, u2, u3, virgule):
     k2 = round(k2, int(virgule))
     k3 = round(k3, int(virgule))
     k = round(k, int(virgule))
+    virgule = int(virgule)
 
     
     U = str(k1) + "*" + u1 + "+"
@@ -383,7 +389,7 @@ def convert_to_text(data, x, virgule):
     elif data['type'] == "lin":
         return "(" + str(round(data['a'], int(virgule))) + "*" + x + signe(round(data['b'], int(virgule))) + ")"
     elif data['type'] == "expo-power":
-        return "(" + str(round(data['a'], int(virgule))) + "+exp(" + str(round(-data['b'], int(virgule))) + "*pow(" + x + "," + str(round(data['c'], int(virgule))) + "))"
+        return "(" + str(round(data['a'], int(virgule))) + "+exp(" + str(round(-data['b'], int(virgule))) + "*pow(" + x + "," + str(round(data['c'], int(virgule))) + ")))"
     elif data['type'] == "quali":
         return "(" + x + ")"
 
@@ -400,7 +406,7 @@ def convert_to_text_excel(data, x, virgule):
     elif data['type'] == "lin":
         return "(" + str(round(data['a'], int(virgule))) + "*" + x + signe(round(data['b'], int(virgule))) + ")"
     elif data['type'] == "expo-power":
-        return "(" + str(round(data['a'], int(virgule))) + "+EXP(" + str(round(-data['b'], int(virgule))) + "*" + x + "^" + str(round(data['c'], int(virgule))) + ")"
+        return "(" + str(round(data['a'], int(virgule))) + "+EXP(" + str(round(-data['b'], int(virgule))) + "*" + x + "^" + str(round(data['c'], int(virgule))) + "))"
     elif data['type'] == "quali":
         return "(" + x + ")"
 
@@ -416,6 +422,6 @@ def convert_to_text_latex(data, x, virgule):
     elif data['type'] == "lin":
         return "(" + str(round(data['a'], int(virgule))) + x + signe(round(data['b'], int(virgule))) + ")"
     elif data['type'] == "expo-power":
-        return "(" + str(round(data['a'], int(virgule))) + "+exp(" + str(round(-data['b'], int(virgule))) + "*" + x + "^{" + str(round(data['c'], int(virgule))) + "})"
+        return "(" + str(round(data['a'], int(virgule))) + "+exp(" + str(round(-data['b'], int(virgule))) + "*" + x + "^{" + str(round(data['c'], int(virgule))) + "}))"
     elif data['type'] == "quali":
         return "(" + x + ")"
