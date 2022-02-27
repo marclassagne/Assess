@@ -11,20 +11,34 @@ from functions import *
 import xlsxwriter
 from xlsxwriter.utility import xl_rowcol_to_cell
 
+compteur=0
+
+
 def formatGenerate(decimal):
 #Function qui rend une chaîne de caractère de 0.00 avec le nombre de décimal
 #correspondant à l'argument decimal (entier)
     s = '0.'
-    for i in range(decimal):
+    for i in range(int(decimal)):
         s += '0'
     return s
 
 def generate_fichier(data):
+    global compteur
+    print()
+    print()
+    print()
+    print()
+    compteur+=1
+    
+    print("00000000000000000000000")
+    print("data",data)
+    print("dataend")
+    print("00000000000000000000000")
 
     # On crée un "classeur"
 
-    r = random.randint(1, 1000)
-    classeur = xlsxwriter.Workbook('fichier' + str(r) + '.xlsx')
+    #r = random.randint(1, 1000)
+    classeur = xlsxwriter.Workbook('fichier'+str(compteur)+'.xlsx')
     # On ajoute une feuille au classeur
 
     decimal = data['settings']['decimals_equations']
@@ -88,8 +102,14 @@ def generate_fichier(data):
         
         for i in range(nb_intermediary):
             feuille.write(i+2,3,'Intermediary value ' + str(i+1), formatNom)
+            print("monAttribut['val_med'][i]",monAttribut['val_med'][i])
             feuille.write(i+2,4,monAttribut['val_med'][i])
-            feuille.write(i+2,5,dic_points[monAttribut['val_med'][i]])
+            print("dic_points",dic_points)
+          
+                
+            #print("dic_points[monAttribut['val_med'][i]]",dic_points[monAttribut['val_med'][i]])
+            #feuille.write(i+2,5,dic_points[monAttribut['val_med'][i]])
+            
         
         feuille.write(nb_intermediary+2,3,'Val_max', formatNom)
         feuille.write(nb_intermediary+2, 4, monAttribut['val_max'])
@@ -107,7 +127,8 @@ def generate_fichier(data):
             pointsY = monAttribut['questionnaire']['points'].values()
             pointsX = monAttribut['questionnaire']['points'].keys()
             pointsX = map(float,pointsX)
-            points = np.stack((pointsX,pointsY), axis = 1).tolist()
+            print([np.stack((pointsX,pointsY), axis = 0)])
+            points = np.stack((pointsX,pointsY), axis = 0).tolist()
 
             if len(points) > 0:
                 if monAttribut['mode'] == "Normal":
@@ -129,15 +150,24 @@ def generate_fichier(data):
 
         for utility in utilities.keys():
 
-            feuille.write(ligne, 7, 'Utility Function', formatTitre)
             feuille.write(ligne, 8, '', formatTitre)
-            feuille.write(ligne + 1, 7, "type", formatNom)
-            feuille.write(ligne + 2, 7, "a", formatNom)
-            feuille.write(ligne + 3, 7, "b", formatNom)
-            feuille.write(ligne + 4, 7, "c", formatNom)
-            feuille.write(ligne + 5, 7, "d", formatNom)
-            feuille.write(ligne + 6, 7, "r2", formatNom)
-            feuille.write(ligne + 7, 7, "DPL", formatNom)
+            
+            #Affichage des noms de ligne de chaque régression
+            liste_des_noms_de_ligne=['Utility Function',"type","a","b","c","d","r2","DPL"]
+            Liste_des_formats=[formatTitre]+7*[formatNom]
+            
+            for k in range(len(liste_des_noms_de_ligne)):
+                feuille.write(ligne + k, 7, liste_des_noms_de_ligne[k], Liste_des_formats[k])
+                
+                
+            # feuille.write(ligne, 7, 'Utility Function', formatTitre)
+            # feuille.write(ligne + 1, 7, "type", formatNom)
+            # feuille.write(ligne + 2, 7, "a", formatNom)
+            # feuille.write(ligne + 3, 7, "b", formatNom)
+            # feuille.write(ligne + 4, 7, "c", formatNom)
+            # feuille.write(ligne + 5, 7, "d", formatNom)
+            # feuille.write(ligne + 6, 7, "r2", formatNom)
+            # feuille.write(ligne + 7, 7, "DPL", formatNom)
 
             if utility == 'exp':
                 feuille.write(ligne + 1, 8, "exponential")
@@ -158,13 +188,18 @@ def generate_fichier(data):
             try:
                 # On remplit d'abord le dernier car pour les coefficients d ça
                 # s'arretera
+                
                 feuille.write(ligne + 6, 8, parameters['r2'], formatCoeff)
-                feuille.write(
-                    ligne + 7, 8, convert_to_text(utility, parameters, monAttribut['name'], data['settings']['decimals_equations']), formatCoeff)
+                
+                feuille.write(ligne + 7, 8, convert_to_text(utility, parameters, monAttribut['name'], int(data['settings']['decimals_equations'])), formatCoeff)
+                
                 feuille.write(ligne + 2, 8, parameters['a'], formatCoeff)
                 feuille.write(ligne + 3, 8, parameters['b'], formatCoeff)
                 feuille.write(ligne + 4, 8, parameters['c'], formatCoeff)
+                print("parameters['c']",parameters['c'])
+                print("----------------------------")
                 feuille.write(ligne + 5, 8, parameters['d'], formatCoeff)
+
             except:
                 print(sys.exc_info())
                 pass
@@ -362,15 +397,16 @@ def generate_fichier(data):
     classeur.close()
 
     # On retourne le nom du fichier
-    return 'fichier' + str(r)
+    return 'fichier'+str(compteur)
 
 # generate juste the file with utility function we checked
 
 
 def generate_fichier_with_specification(data):
-
-    r = random.randint(1, 1000)
-    classeur = xlsxwriter.Workbook('fichier' + str(r) + '.xlsx')
+    global compteur
+    compteur+=1
+    #r = random.randint(1, 1000)
+    classeur = xlsxwriter.Workbook('fichier'+str(compteur)+'.xlsx')
     # On ajoute une feuille au classeur
 
     for monAttribut in data['attributes']:
@@ -684,7 +720,7 @@ def generate_fichier_with_specification(data):
     classeur.close()
 
     # On retourne le nom du fichier
-    return 'fichier' + str(r)
+    return 'fichier'+str(compteur)
 
 
 def reduce(nombre):
