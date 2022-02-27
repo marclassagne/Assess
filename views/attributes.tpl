@@ -25,8 +25,8 @@
     <h2> Add a new attribute: </h2>
 	
 	<div id="button_type" style="text-align:center;">
-		<button type="button" class="btn btn-default btn-lg" id="button_Quantitative">Quantitative</button>
-		<button type="button" class="btn btn-default btn-lg" id="button_Qualitative">Qualitative</button>
+		<button type="button" class="btn btn-outline-dark btn-lg" id="button_Quantitative">Quantitative</button>
+		<button type="button" class="btn btn-outline-dark btn-lg" id="button_Qualitative">Qualitative</button>
 	</div>
 	
     <!------------ FORM FOR A QUANTITATIVE ATTRIBUTE ------------>
@@ -82,8 +82,8 @@
 		
 		<div class="form-group">
 			<label for="att_value_med_quali">Intermediary value(s):</label>
-				<input type="button" class="btn btn-default" id="add_value_med_quali" value="Add an item"/>   
-				<input type="button" class="btn btn-default" id="del_value_med_quali" value="Delete last item"/>
+				<input type="button" class="btn btn-outline-dark" id="add_value_med_quali" value="Add an item"/>   
+				<input type="button" class="btn btn-outline-dark" id="del_value_med_quali" value="Delete last item"/>
 				<ol id="list_med_values_quali">
 					<li class="col-auto"><input type="text" class="form-control col-auto" id="att_value_med_quali_1" placeholder='Intermediary Value 1'/></li>
 				</ol>
@@ -115,7 +115,7 @@ function verifierCaracteres(event) {
 			
 	var champ = document.getElementById('mon_input');
 			
-	var caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	var caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
 			
 	if(caracteres.indexOf(touche) >= 0) {
 		champ.value += touche;
@@ -308,8 +308,8 @@ $(function() {
 				
 				text_table += '<td>' + attribute.method + '</td>'+
 					'<td>' + attribute.mode + '</td>'+
-					'<td><button type="button" id="edit_' + i + '" class="btn btn-default btn-xs">Edit</button></td>'+
-					'<td><button type="button" class="btn btn-default" id="deleteK'+i+'"><img src="/static/img/delete.ico" style="width:16px"/></button></td></tr>';
+					'<td><button type="button" id="edit_' + i + '" class="btn btn-outline-dark btn-xs">Edit</button></td>'+
+					'<td><button type="button" class="btn btn-outline-dark" id="deleteK'+i+'"><img src="/static/img/delete.ico" style="width:16px"/></button></td></tr>';
 								
 				$('#table_attributes').append(text_table);
 				//We define the action when we click on the State check input
@@ -382,7 +382,7 @@ $(function() {
 		/*
 		This function takes currstring (a string) as argument and return true if one char is not alphanumerical
 		*/
-        var accepted = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var accepted = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
         var strlist = currstring.split('');
         let testtable = [];
         strlist.forEach(element => testtable.push(accepted.includes(element)));
@@ -427,7 +427,7 @@ $(function() {
 					'val_min': val_min,
 					'val_med': [
 						String(parseFloat(val_min)+.25*(parseFloat(val_max)-parseFloat(val_min))),
-						String(parseFloat(val_min)+.50*(parseFloat(val_max)-parseFloat(val_min))), //yes, it's (val_max+val_min)/2, but it looks better ^^
+						String(parseFloat(val_min)+.50*(parseFloat(val_max)-parseFloat(val_min))), //yes, it is (val_max+val_min)/2, but it looks better ^^
 						String(parseFloat(val_min)+.75*(parseFloat(val_max)-parseFloat(val_min)))
 					],
 					'val_max': val_max,
@@ -453,7 +453,7 @@ $(function() {
 						'val_min': val_min,
 						'val_med': [
 							String(parseFloat(val_min)+.25*(parseFloat(val_max)-parseFloat(val_min))),
-							String(parseFloat(val_min)+.50*(parseFloat(val_max)-parseFloat(val_min))), //yes, it's (val_max+val_min)/2, but it looks better ^^
+							String(parseFloat(val_min)+.50*(parseFloat(val_max)-parseFloat(val_min))), //yes, it s (val_max+val_min)/2, but it looks better ^^
 							String(parseFloat(val_min)+.75*(parseFloat(val_max)-parseFloat(val_min)))
 						],
 						'val_max': val_max,
@@ -576,7 +576,7 @@ $(function() {
 			$('#att_value_med_quali_1').val("");
 			$('#att_value_max_quali').val("");
 			
-			/// On ramène le nombre d'éléments intermédiaires à 1
+			/// On ramène le nombre d éléments intermédiaires à 1
 			for (var ii=val_med.length; ii>1; ii--) {
 				var longueur = document.getElementById('list_med_values_quali').getElementsByTagName('li').length;
 				lists[longueur-1].parentNode.removeChild(lists[longueur-1]);

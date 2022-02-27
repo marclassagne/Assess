@@ -1,7 +1,8 @@
 %include('header_init.tpl', heading='Assess utility functions')
+
 <h3 id="attribute_name"></h3>
 <div id="select">
-	<table class="table">
+	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
 				<th>Attribute</th>
@@ -25,7 +26,7 @@
 	<h2>Select your choice </h2>
 </div>
 
-<div id= "retour_quali" > <button type="button" class="btn btn-default comeback_quali" id = "update"> Go to main page </button> 
+<div id= "retour_quali" > <button type="button" class="btn btn-outline-dark comeback_quali" id = "update"> Go to main page </button> 
 </div>
 <div id= "attribute_name"></div>
 <div id ="nouveaubloc"></div>
@@ -44,14 +45,14 @@
 					<tr>
 						
 						<td id="ton_choix"></td>
-						<td><button type="button" class="btn btn-default comeback" id = "update">Update</button> </td>
+						<td><button type="button" class="btn btn-outline-dark comeback" id = "update">Update</button> </td>
 					</tr>
 						
 		</tbody>
 	</table>
 </div>
 <div id="main_graph" class="col-lg-5"></div>
-<div id="functions" class="col-lg-7"></div>
+<div id="functions" class="width:100%"></div>
 %include('header_end.tpl')
 %include('js.tpl')
 <script>
@@ -59,6 +60,7 @@
 </script>
 <!-- Tree object -->
 <script src="{{ get_url('static', path='js/tree.js') }}"></script>
+
 <script>
 	$(function() {
 		$('li.questions').addClass("active");
@@ -89,18 +91,19 @@
 							 '<td>' + attribute.method + '</td>'+
 							 '<td id="graph_choisi'+i+'" ></td>';
 							 
-							 
+            
 		
-		
-			text_table += '<td><table style="width:100%"><tr><td>' + attribute.val_min + '</td><td> : </td><td>'+(attribute.mode=="Normal"?0:1)+'</td></tr>';
+			text_table += '<td><table class="table table-striped" style="width:100%"><tr><td>' + attribute.val_min + '</td><td> : </td><td>'+(attribute.mode=="Normal"?0:1)+'</td></tr>';
 			
 			if (attribute.method == "PE" || attribute.method == "LE"){
 				for (var ii=0, len=attribute.val_med.length; ii<len; ii++){
 					text_table += '<tr><td>' + attribute.val_med[ii] + '</td><td> : </td>';
 					if(attribute.questionnaire.points[attribute.val_med[ii]]){
 						text_table += '<td>' + attribute.questionnaire.points[attribute.val_med[ii]] + '</td>';
+						
+						
 					} else {
-						text_table += '<td><button type="button" class="btn btn-default btn-xs answer_quest_'+(attribute.type=="Qualitative"?"quali":"quanti")+'" id="q_' + attribute.name + '_' + attribute.val_med[ii] + '_' + ii + '">Assess</button>' + '</td></tr>';
+						text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs answer_quest_'+(attribute.type=="Qualitative"?"quali":"quanti")+'" id="q_' + attribute.name + '_' + attribute.val_med[ii] + '_' + ii + '">Assess</button>' + '</td></tr>';
 					};
 				};
 			} else {
@@ -111,29 +114,33 @@
 				
 				for (var ii=Object.keys(attribute.questionnaire.points).length; ii<3; ii++){
 					text_table += '<tr><td>-</td><td> : </td>'+
-								  '<td><button type="button" class="btn btn-default btn-xs answer_quest_'+(attribute.type=="Qualitative"?"quali":"quanti")+'" id="q_' + attribute.name + '_' + ii + '_' + ii + '">Assess</button>' + '</td></tr>';
+								  '<td><button type="button" class="btn btn-outline-dark btn-xs answer_quest_'+(attribute.type=="Qualitative"?"quali":"quanti")+'" id="q_' + attribute.name + '_' + ii + '_' + ii + '">Assess</button>' + '</td></tr>';
 				};
 			}; 
 			
 			text_table += '<tr><td>' + attribute.val_max + '</td><td> : </td><td>'+(attribute.mode=="Normal"?1:0)+'</td></tr></table></td>';
+			
 			if (attribute.type=="Quantitative") {
 				if (attribute.questionnaire.number > 0) {
 					if (attribute.questionnaire.number === attribute.val_med.length) {
-						text_table += '<td><button type="button" class="btn btn-default btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
-						text_table += '<button type="button" class="btn btn-default btn-xs" id="excel_' + i + '">export to Excel</button></td>';
+						text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
+						text_table += '<button type="button" class="btn btn-outline-dark btn-xs" id="excel' + i +'">export to Excel</button></td>';
 					}
+					
 					else {
-						text_table += '<td><button type="button" class="btn btn-default btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
+						text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
 					}
+
 					
 				} else {
 					text_table += '<td>No assessment yet ';
 				};
+				
 			} else {
 				if (attribute.questionnaire.number > 0) {
 					if (attribute.questionnaire.number === attribute.val_med.length) {
-						//text_table += '<td><button type="button" class="btn btn-default btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
-						text_table += '<td><button type="button" class="btn btn-default btn-xs" id="excel_' + i + '">export to Excel</button></td>';
+						//text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
+						text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs" id="excel_' + i + '">export to Excel</button></td>';
 					}
 					else {
 						text_table += '<td>Please assess all the medium values ';
@@ -145,9 +152,15 @@
 			};
 			
 			
-			text_table += '<td><button type="button" id="deleteK' + i + '" class="btn btn-default btn-xs">Reset</button></td>';
+			
+			
+			
+			
+			
+			text_table += '<td><button type="button" id="deleteK' + i + '" class="btn btn-outline-dark btn-xs">Reset</button></td>';
 			$('#table_attributes').append(text_table);
 			(function(_i) {
+				
 				$('#deleteK' + _i).click(function() {
 					if (confirm("Are you sure you want to delete all the assessments for "+assess_session.attributes[_i].name+"?") == false) {
 							return
@@ -162,6 +175,31 @@
 					//refresh the page
 					window.location.reload();
 				});
+				
+				
+				$("#excel"+ _i).click(function() {
+            		var big_data = localStorage['assess_session']; 
+            		//big_data is string
+            		
+                	
+            		//document.write(big_data);
+            		
+            		$.post('ajax', '{"type":"demande_de_transformation", "data":'+big_data+', "numero":'+ _i +'}', function(data) {
+            			var data_2_export = data;
+            			
+            			//document.write(data_2_export);
+
+            		
+                		$.post('ajax', '{"type":"export_xlsx", "data":'+data_2_export+'}', function(data) {
+                			document.location = "export_download/"+data;
+                		});
+            		});
+            		
+            		
+            	});
+				
+				
+				
 			})(i);
 			
 		};
@@ -283,7 +321,7 @@
 					
 					arbre_pe.display();
 					arbre_pe.update();
-					$('#trees').append('</div><div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-default" id="gain">Certain gain</button><button type="button" class="btn btn-default" id="lottery">Lottery</button></div>');
+					$('#trees').append('</div><div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-outline-dark" id="gain">Certain gain</button><button type="button" class="btn btn-outline-dark" id="lottery">Lottery</button></div>');
 					// FUNCTIONS
 					function sync_values() {
 						arbre_pe.questions_proba_haut = probability;
@@ -303,11 +341,11 @@
 					function ask_final_value(val) {
 						// we delete the choice div
 						$('.choice').hide();
-						$('.container-fluid').append(
+						$('#page-wrapper').append(
 							'<div id= "final_value" style="text-align: center;"><br /><br /><p>We are almost done. Please enter the probability that makes you indifferent between the two situations above. Your previous choices indicate that it should be between ' + min_interval + ' and ' + max_interval + ' but you are not constrained to that range <br /> ' + min_interval +
 							'\
 						 <= <input type="text" class="form-control" id="final_proba" placeholder="Probability" value="' + val + '" style="width: 100px; display: inline-block"> <= ' + max_interval +
-							'</p><button type="button" class="btn btn-default final_validation">Validate</button></div>'
+							'</p><button type="button" class="btn btn-outline-dark final_validation">Validate</button></div>'
 						);
 						// when the user validate
 						$('.final_validation').click(function() {
@@ -365,7 +403,7 @@
 					arbre_droite.display();
 					arbre_droite.update();
 					// we add the choice button
-					$('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-default lottery_a">Lottery A</button><button type="button" class="btn btn-default lottery_b">Lottery B</button></div>')
+					$('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-outline-dark lottery_a">Lottery A</button><button type="button" class="btn btn-outline-dark lottery_b">Lottery B</button></div>')
 					function treat_answer(data) {
 						min_interval = data.interval[0];
 						max_interval = data.interval[1];
@@ -381,11 +419,11 @@
 					}
 					function ask_final_value(val) {
 						$('.choice').hide();
-						$('.container-fluid').append(
+						$('#page-wrapper').append(
 							'<div id= "final_value" style="text-align: center;"><br /><br /><p>We are almost done. Please enter the probability that makes you indifferent between the two situations above. Your previous choices indicate that it should be between ' + min_interval + ' and ' + max_interval + ' but you are not constrained to that range <br /> ' + min_interval +
 							'\
 						 <= <input type="text" class="form-control" id="final_proba" placeholder="Probability" value="' + val + '" style="width: 100px; display: inline-block"> <= ' + max_interval +
-							'</p><button type="button" class="btn btn-default final_validation">Validate</button></div>'
+							'</p><button type="button" class="btn btn-outline-dark final_validation">Validate</button></div>'
 						);
 						// when the user validate
 						$('.final_validation').click(function() {
@@ -437,7 +475,7 @@
 					arbre_ce.display();
 					arbre_ce.update();
 					// we add the choice button
-					$('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-default" id="gain">Certain gain</button><button type="button" class="btn btn-default" id="lottery">Lottery</button></div>')
+					$('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-outline-dark" id="gain">Certain gain</button><button type="button" class="btn btn-outline-dark" id="lottery">Lottery</button></div>')
 					function utility_finder(gain) {
 						var points = assess_session.attributes[indice].questionnaire.points;
 						if (gain == val_min) {
@@ -459,7 +497,7 @@
 
 						//arbre_ce.questions_val_max - arbre_ce.quesstions_val_min = intervale de départ
 						
-						if (max_interval - min_interval <= 0.05 * (parseFloat(arbre_ce.questions_val_max) - parseFloat(arbre_ce.questions_val_min)) || (max_interval - min_interval) < 2) { //interval <= 5% de l'interval de départ ou interval < 2
+						if (max_interval - min_interval <= 0.05 * (parseFloat(arbre_ce.questions_val_max) - parseFloat(arbre_ce.questions_val_min)) || (max_interval - min_interval) < 2) { //interval <= 5% de l interval de départ ou interval < 2
 							$('.choice').hide();
 							arbre_ce.questions_val_mean = gain + ' ' + unit;
 							arbre_ce.update();
@@ -472,11 +510,11 @@
 					function ask_final_value(val) {
 						$('.lottery_a').hide();
 						$('.lottery_b').hide();
-						$('.container-fluid').append(
+						$('#page-wrapper').append(
 							'<div id= "final_value" style="text-align: center;"><br /><br /><p><p>We are almost done. Please enter the value that makes you indifferent between the two situations above. Your previous choices indicate that it should be between ' + min_interval + ' and ' + max_interval + ' but you are not constrained to that range <br /> ' + min_interval +
 							'\
 						 <= <input type="text" class="form-control" id="final_proba" placeholder="Probability" value="' + val + '" style="width: 100px; display: inline-block"> <= ' + max_interval +
-							'</p><button type="button" class="btn btn-default final_validation">Validate</button></div>'
+							'</p><button type="button" class="btn btn-outline-dark final_validation">Validate</button></div>'
 						);
 			
 						// when the user validate
@@ -557,7 +595,7 @@
 					arbre_cepv.display();
 					arbre_cepv.update();
 					// we add the choice button
-                                        $('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-default" id="gain">Certain gain</button><button type="button" class="btn btn-default" id="lottery">Lottery</button></div>')
+                                        $('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-outline-dark" id="gain">Certain gain</button><button type="button" class="btn btn-outline-dark" id="lottery">Lottery</button></div>')
 					
 					function utility_finder(gain) {
 						var points = assess_session.attributes[indice].questionnaire.points;
@@ -592,11 +630,11 @@
 					function ask_final_value(val) {
 						$('.lottery_a').hide();
 						$('.lottery_b').hide();
-						$('.container-fluid').append(
+						$('#page-wrapper').append(
 							'<div id= "final_value" style="text-align: center;"><br /><br /><p>We are almost done. Please enter the probability that makes you indifferent between the two situations above. Your previous choices indicate that it should be between ' + min_interval + ' and ' + max_interval + ' but you are not constrained to that range <br /> ' + min_interval +
 							'\
 						 <= <input type="text" class="form-control" id="final_proba" placeholder="Probability" value="' + val + '" style="width: 100px; display: inline-block"> <= ' + max_interval +
-							'</p><button type="button" class="btn btn-default final_validation">Validate</button></div>'
+							'</p><button type="button" class="btn btn-outline-dark final_validation">Validate</button></div>'
 						);
 						// when the user validate
 						$('.final_validation').click(function() {
@@ -689,8 +727,8 @@
 					arbre_pe.update();
 					$('#trees').append('</div><div class=choice style="text-align: center;">'+
 										'<p>Which option do you prefer?</p>'+
-										'<button type="button" class="btn btn-default" id="gain"> Certain gain </button>'+
-										'<button type="button" class="btn btn-default" id="lottery"> Lottery </button></div>');
+										'<button type="button" class="btn btn-outline-dark" id="gain"> Certain gain </button>'+
+										'<button type="button" class="btn btn-outline-dark" id="lottery"> Lottery </button></div>');
 					// FUNCTIONS
 					function sync_values() {
 						arbre_pe.questions_proba_haut = probability;
@@ -710,12 +748,12 @@
 					function ask_final_value(val) {
 						// we delete the choice div
 						$('.choice').hide();
-						$('.container-fluid').append(
+						$('#page-wrapper').append(
 							'<div id= "final_value" style="text-align: center;"><br /><br />'+
 							'<p>We are almost done. Please enter the probability that makes you indifferent between the two situations above. Your previous choices indicate that it should be between ' + min_interval + ' and ' + max_interval + ' but you are not constrained to that range <br /> ' + min_interval +
 							'\
 							<= <input type="text" class="form-control" id="final_proba" placeholder="Probability" value="' + val + '" style="width: 100px; display: inline-block"> <= ' + max_interval +
-							'</p><button type="button" class="btn btn-default final_validation">Validate</button></div>'
+							'</p><button type="button" class="btn btn-outline-dark final_validation">Validate</button></div>'
 						);
 						// when the user validate
 						$('.final_validation').click(function() {
@@ -861,9 +899,9 @@
 				if (settings.language=="french") {
 					excel=excel.replace(/\./gi,",");
 				}
-				var copy_button_dpl = $('<button class="btn functions_text_form" id="btn_dpl_' + key + '" data-clipboard-text="' + copie + '" title="Click to copy me.">Copy to clipboard (DPL format)</button>');
-				var copy_button_excel = $('<button class="btn functions_text_form" id="btn_excel_' + key + '" data-clipboard-text="' + excel + '" title="Click to copy me.">Copy to clipboard (Excel format)</button>');
-				var copy_button_latex = $('<button class="btn functions_text_form" id="btn_latex_' + key + '" data-clipboard-text="' + render + '" title="Click to copy me.">Copy to clipboard (LaTeX format)</button>');
+				var copy_button_dpl = $('<button class="btn btn-outline-dark functions_text_form" id="btn_dpl_' + key + '" data-clipboard-text="' + copie + '" title="Click to copy me.">Copy to clipboard (DPL format)</button>');
+				var copy_button_excel = $('<button class="btn btn-outline-dark functions_text_form" id="btn_excel_' + key + '" data-clipboard-text="' + excel + '" title="Click to copy me.">Copy to clipboard (Excel format)</button>');
+				var copy_button_latex = $('<button class="btn btn-outline-dark functions_text_form" id="btn_latex_' + key + '" data-clipboard-text="' + render + '" title="Click to copy me.">Copy to clipboard (LaTeX format)</button>');
 				if (settings.language=="french") {
 					render=render.replace(/\./gi,",");
 				}
@@ -1631,7 +1669,8 @@
 					$('#fonction_choisie').empty();
 					$('#fonctions_choisies').empty();
 					
-					
+					location.reload();
+
 					
 					
 					});
@@ -1659,8 +1698,8 @@
 				list_names = [].concat(val_min, val_med, val_max),
 				points = assess_session.attributes[indice].questionnaire.points,
 				list_points = [];
-			points[val_min] = 0; //On force l'utilité de la pire à 0
-			points[val_max] = 1; //On force l'utilité de la meilleure à 1
+			points[val_min] = 0; //On force l utilité de la pire à 0
+			points[val_max] = 1; //On force l utilité de la meilleure à 1
 			
 			for (var ii=0, len=list_names.length; ii<len; ii++) {
 				list_points.push(points[list_names[ii]]);
@@ -1709,7 +1748,7 @@
 					$('#fonctions_choisies').empty();
 					
 					
-					
+					location.reload();
 					
 					});
 				
@@ -1724,16 +1763,6 @@
 	  font-family: arial, sans-serif;
 	  border-collapse: collapse;
 	  width: 100%;
-	}
-	
-	td, th {
-	  border: 1px solid #dddddd;
-	  text-align: left;
-	  padding: 8px;
-	}
-	
-	tr:nth-child(even) {
-	  background-color: #e2e2e2;
 	}
 	</style>
 </body>
