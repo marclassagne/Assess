@@ -2,7 +2,6 @@
 
 <h2>Former students:</h2>
 <ul>
-
     <li>Maillefert Paul</li>
     <li>Sordo Zineb</li>
     <li>Charaf Chaimaà</li>
