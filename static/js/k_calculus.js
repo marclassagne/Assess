@@ -1044,7 +1044,6 @@ $(function(){
 	$("#button_calculate_utility").click(function() {
 		
 		
-		
 		$('#utility_function').empty().show();
 		var assess_session = JSON.parse(localStorage.getItem("assess_session"));
 		if(get_Active_Method()==0)//multiplicative
@@ -1063,7 +1062,7 @@ $(function(){
 			{
 				if(k_utility_multiplicative[i]==null)
 				{
-					alert("You must reset your relative attributes");
+					alert("Please have an Utility Function for each attribute in the Utility Assessment page");
 					return;
 				}
 			}
@@ -1101,7 +1100,7 @@ $(function(){
 			{
 				if(k_utility_multilinear[i]==null)
 				{
-					alert("You must reset your relative attributes");
+					alert("Please have an Utility Function for each attribute in the Utility Assessment page");
 					return;
 				}
 			}

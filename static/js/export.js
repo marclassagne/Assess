@@ -17,6 +17,14 @@ $(function() {
 	});
 
 	$('#export_xls').click(function() {
+
+		var data_2_export = localStorage['assess_session'];
+		$.post('ajax', '{"type":"export_xlsx", "data":'+data_2_export+'}', function(data) {
+			document.location = "export_download/"+data;
+		});
+	});
+
+	$("#excel0").click(function() {
 		var data_2_export = localStorage['assess_session'];
 		$.post('ajax', '{"type":"export_xlsx", "data":'+data_2_export+'}', function(data) {
 			document.location = "export_download/"+data;
