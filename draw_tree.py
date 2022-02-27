@@ -9,10 +9,7 @@ def scale(image, text_x_gain, text_y_gain, text_x_upper_label, text_y_upper_labe
     offsety = offset_y(text_y_upper_label, text_y_bottom_label)
     back = Image.new(
         "RGBA", (width + offsetx, height + offsety), (255, 255, 255, 0))
-    #print("a", text_x_gain + 50)
-    #print("b", int(text_y_upper_label) / 2 + 10)
-
-    back.paste(image, (text_x_gain + 50, int(text_y_upper_label) // 2 + 10))
+    back.paste(image, (text_x_gain + 50, int(text_y_upper_label) / 2 + 10))
     return back
 
 
@@ -52,12 +49,9 @@ def offset_y(text_y_upper_label, text_y_bottom_label):
 
 
 def draw(gain, upper_label, bottom_label, upper_proba, bottom_proba, assess_type):
-    
-    gain = str(gain)
-   
-
-    upper_label = str(upper_label)
-    bottom_label = str(bottom_label)
+    gain = str(gain.encode('utf-8'))
+    upper_label = str(upper_label.encode('utf-8'))
+    bottom_label = str(bottom_label.encode('utf-8'))
     upper_proba = str(upper_proba)
     bottom_proba = str(bottom_proba)
     imgdata = io.BytesIO()
@@ -65,7 +59,6 @@ def draw(gain, upper_label, bottom_label, upper_proba, bottom_proba, assess_type
     font = ImageFont.truetype("static/fonts/helvetica-neue-bold.ttf", 16, encoding="utf-8")
     font2 = ImageFont.truetype("static/fonts/helvetica-neue-bold.ttf", 24, encoding="utf-8")
     text_x_gain = max_text_width(gain)
-    #print([text_x_gain])
     text_y_gain = text_height(gain)
     text_x_upper_label = max_text_width(upper_label)
     text_y_upper_label = text_height(upper_label)
@@ -104,31 +97,17 @@ def draw(gain, upper_label, bottom_label, upper_proba, bottom_proba, assess_type
     if (assess_type == "CE" or assess_type == "CE_PV"):
         draw.text((x, y), gain.decode("utf-8"), font=font, fill=(255,0,0,255))
     else:
-        #print(([gain]))
-        #print([gain_enc])
-        draw.text((x, y), gain, font=font, fill=(0,0,0,255))        #        draw.text((x, y), gain.decode("utf-8"), font=font, fill=(0,0,0,255))
-
+        draw.text((x, y), gain.decode("utf-8"), font=font, fill=(0,0,0,255))
     if (assess_type == "PE" or assess_type == "CE" or assess_type == "CE_PV"):
         x=5
         y+=text_y_gain
         draw.text((x, y), " \nwith certainty", font=font, fill=(0,0,0,255))
     x = width + offsetx - text_x_upper_label - 50
     y = 10
-    draw.text((x, y), upper_label, font=font, fill=(0,0,0,255))
-    #    draw.text((x, y), upper_label.decode("utf-8"), font=font, fill=(0,0,0,255))
-
+    draw.text((x, y), upper_label.decode("utf-8"), font=font, fill=(0,0,0,255))
     x = width + offsetx - text_x_bottom_label - 50
     y = height + offsety - text_y_bottom_label - 10
-    draw.text((x, y), bottom_label, font=font, fill=(0,0,0,255))
-    #draw.text((x, y), bottom_label.decode("utf-8"), font=font, fill=(0,0,0,255))
+    draw.text((x, y), bottom_label.decode("utf-8"), font=font, fill=(0,0,0,255))
     tree.save(imgdata, format="png")
     imgdata = base64.b64encode(imgdata.getvalue())
     return imgdata
-
-#query = {'type': 'tree', 'gain': '5100 EURO', 'upper_label': '10000 EURO', 'bottom_label': '200 EURO', 'upper_proba': '0.80', 'bottom_proba': '0.20', 'assess_type': 'PE'}
-#photo=draw(query['gain'], query['upper_label'], query['bottom_label'], query['upper_proba'], query['bottom_proba'], query['assess_type'])
-
-#Image.open(photo)
-
-#im=Image.open(photo)
-#im.show()
