@@ -2,6 +2,7 @@
 
 <h2>Former students:</h2>
 <ul>
+    <li>Test1</li>
     <li>Adnane Tebaa</li>
     <li>Alexandre Cochennec</li>
     <li>Antoine Normand</li>
