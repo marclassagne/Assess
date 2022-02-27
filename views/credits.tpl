@@ -2,7 +2,6 @@
 
 <h2>Former students:</h2>
 <ul>
-    <li>bottle</li>
     <li>Maillefert Paul</li>
     <li>Maillefert Paul</li>
     <li>Sordo Zineb</li>
