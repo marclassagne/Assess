@@ -6,3 +6,4 @@ XlsxWriter
 openpyxl
 sympy
 Pillow
+matplotlib-label-lines
