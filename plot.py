@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import io
 from functions import *
+from labellines import labelLine, labelLines
 
 #show the draft (on the right) of all curves
 def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
@@ -33,6 +34,8 @@ def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
 
     #translation suivant x des courbes a afficher en cas de valeurs negatives
     xneg = np.linspace(0, max_ - min_, 100)
+    #xneg = x
+
 
     if min_ >= 0 :
         for func in dictionary.keys():
@@ -85,7 +88,7 @@ def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
                         ax.legend(loc='best',fontsize=6)
 
     else: 
-        plt.xlim(0,max_ - min_)
+        #plt.xlim(0,max_ - min_)
         for func in dictionary.keys():
             if func == 'exp':
                 if plot_all or 'exponential' in liste:
@@ -141,6 +144,8 @@ def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
     for index in range(len(lx)-2):
         plt.annotate(dictionary['points'][index], xy=(lx[index],ly[index]),xytext=(+10,-10),textcoords='offset points',horizontalalignment='center', verticalalignment='center')
     
+    labelLines(ax.get_lines(), align=True, fontsize=9)
+
     plt.savefig(imgdata, format='svg')
     plt.close()
 
@@ -272,6 +277,8 @@ def generate_svg_plot2(dictionary, min, max, liste_cord, width, choice):
                             plt.plot(x, funcexpopower(xneg, a, b, c),
                             '#26C4EC', label="Expo-Power Fitted Curve")
 
+
+    #labelLines(plt.get_lines(), align=True, fontsize=6)
 
     plt.savefig(imgdata, format='svg')
     plt.close()

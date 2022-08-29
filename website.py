@@ -317,5 +317,5 @@ try:
         app.run(host='0.0.0.0', port=argv[1])
 except:
     # print("You need to specify an argument (local for local testing: python website.py local")
-    # you need to cd to project directory, ex: print("cd C:\\Path\\to\\Project\\directory"
+    print("cd C:\\Users\\Yossef\\Desktop\\Assess-master")
     print("python website.py local")
