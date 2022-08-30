@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import io
 from functions import *
+from labellines import labelLine, labelLines
 
 #show the draft (on the right) of all curves
 def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
@@ -33,6 +34,8 @@ def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
 
     #translation suivant x des courbes a afficher en cas de valeurs negatives
     xneg = np.linspace(0, max_ - min_, 100)
+    #xneg = x
+
 
     if min_ >= 0 :
         for func in dictionary.keys():
@@ -85,7 +88,7 @@ def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
                         ax.legend(loc='best',fontsize=6)
 
     else: 
-        plt.xlim(0,max_ - min_)
+        #plt.xlim(0,max_ - min_)
         for func in dictionary.keys():
             if func == 'exp':
                 if plot_all or 'exponential' in liste:
@@ -141,6 +144,8 @@ def generate_svg_plot(dictionary, min_, max_, liste_cord, width,liste):
     for index in range(len(lx)-2):
         plt.annotate(dictionary['points'][index], xy=(lx[index],ly[index]),xytext=(+10,-10),textcoords='offset points',horizontalalignment='center', verticalalignment='center')
     
+    labelLines(ax.get_lines(), align=True, fontsize=9)
+
     plt.savefig(imgdata, format='svg')
     plt.close()
 
@@ -180,48 +185,48 @@ def generate_svg_plot2(dictionary, min, max, liste_cord, width, choice):
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'exponential':
-			plt.plot(x, funcexp(x, a, b, c), '#401539',
-                         label="Exp Fitted Curve")
+                if choice == 'exponential':
+                        plt.plot(x, funcexp(x, a, b, c), '#401539',
+                        label="Exp Fitted Curve")
 
             elif func == 'quad':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'quadratic':
-                	plt.plot(x, funcquad(x, a, b, c), '#458C8C',
-                         label="Quad Fitted Curve")
+                if choice == 'quadratic':
+                        plt.plot(x, funcquad(x, a, b, c), '#458C8C',
+                        label="Quad Fitted Curve")
 
             elif func == 'pow':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'power':
-               		plt.plot(x, funcpuis(x, a, b, c), '#6DA63C',
-                        	 label="Pow Fitted Curve")
+                if choice == 'power':
+                            plt.plot(x, funcpuis(x, a, b, c), '#6DA63C',
+                            label="Pow Fitted Curve")
 
             elif func == 'log':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
                 d = dictionary[func]['d']
-		if choice == 'logarithmic':
-                	plt.plot(x, funclog(x, a, b, c, d),
-                         	'#D9585A', label="Log Fitted Curve")
+                if choice == 'logarithmic':
+                            plt.plot(x, funclog(x, a, b, c, d),
+                            '#D9585A', label="Log Fitted Curve")
 
             elif func == 'lin':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
-		if choice == 'linear':
-                	plt.plot(x, funclin(x, a, b), '#D9B504', label="Lin Fitted Curve")
+                if choice == 'linear':
+                            plt.plot(x, funclin(x, a, b), '#D9B504', label="Lin Fitted Curve")
 
             elif func =='expo-power':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'exponential-power':
-                	plt.plot(x, funcexpopower(x, a, b, c),
-                         '#26C4EC', label="Expo-Power Fitted Curve")
+                if choice == 'exponential-power':
+                            plt.plot(x, funcexpopower(x, a, b, c),
+                            '#26C4EC', label="Expo-Power Fitted Curve")
 
     else: 
         for func in dictionary.keys():
@@ -229,49 +234,51 @@ def generate_svg_plot2(dictionary, min, max, liste_cord, width, choice):
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'exponential':
-                	plt.plot(x, funcexp(xneg, a, b, c), '#401539',
-                         label="Exp Fitted Curve")
+                if choice == 'exponential':
+                            plt.plot(x, funcexp(xneg, a, b, c), '#401539',
+                            label="Exp Fitted Curve")
 
             elif func == 'quad':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'quadratic':
-                	plt.plot(x, funcquad(xneg, a, b, c), '#458C8C',
-                         label="Quad Fitted Curve")
+                if choice == 'quadratic':
+                            plt.plot(x, funcquad(xneg, a, b, c), '#458C8C',
+                            label="Quad Fitted Curve")
 
             elif func == 'pow':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'power':
-                	plt.plot(x, funcpuis(xneg, a, b, c), '#6DA63C',
-                         label="Pow Fitted Curve")
+                if choice == 'power':
+                            plt.plot(x, funcpuis(xneg, a, b, c), '#6DA63C',
+                            label="Pow Fitted Curve")
 
             elif func == 'log':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
                 d = dictionary[func]['d']
-		if choice == 'logarithmic':
-                	plt.plot(x, funclog(xneg, a, b, c, d),
-                         '#D9585A', label="Log Fitted Curve")
+                if choice == 'logarithmic':
+                            plt.plot(x, funclog(xneg, a, b, c, d),
+                            '#D9585A', label="Log Fitted Curve")
 
             elif func == 'lin':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
-		if choice == 'linear':
-                	plt.plot(x, funclin(xneg, a, b), '#D9B504', label="Lin Fitted Curve")
+                if choice == 'linear':
+                            plt.plot(x, funclin(xneg, a, b), '#D9B504', label="Lin Fitted Curve")
 
             elif func =='expo-power':
                 a = dictionary[func]['a']
                 b = dictionary[func]['b']
                 c = dictionary[func]['c']
-		if choice == 'exponential-power':
-                	plt.plot(x, funcexpopower(xneg, a, b, c),
-                         '#26C4EC', label="Expo-Power Fitted Curve")
+                if choice == 'exponential-power':
+                            plt.plot(x, funcexpopower(xneg, a, b, c),
+                            '#26C4EC', label="Expo-Power Fitted Curve")
 
+
+    #labelLines(plt.get_lines(), align=True, fontsize=6)
 
     plt.savefig(imgdata, format='svg')
     plt.close()
@@ -305,24 +312,24 @@ def pie_chart(names, probas):
 
 def generate_svg_plot_QUALI(dictionary, list_names, width):
 
-	# img
-	imgdata = io.BytesIO()
+    # img
+    imgdata = io.BytesIO()
 
-	# Open a new figure with the right width
-	plt.figure(figsize=(width, width))
-	
-	graph_x = list(range(len(dictionary)))
-	graph_y = dictionary
-	
-	plt.figure(1)
-	plt.plot(graph_x, graph_y, 'r')
-	plt.plot([0, graph_x[-1]], [0, 1], 'k')
-	plt.axis([0, graph_x[-1], 0, 1])
-	plt.grid()
-	plt.xticks(graph_x, list_names)
+    # Open a new figure with the right width
+    plt.figure(figsize=(width, width))
+    
+    graph_x = list(range(len(dictionary)))
+    graph_y = dictionary
+    
+    plt.figure(1)
+    plt.plot(graph_x, graph_y, 'r')
+    plt.plot([0, graph_x[-1]], [0, 1], 'k')
+    plt.axis([0, graph_x[-1], 0, 1])
+    plt.grid()
+    plt.xticks(graph_x, list_names)
 
-	plt.savefig(imgdata, format='svg')
-	plt.close()
+    plt.savefig(imgdata, format='svg')
+    plt.close()
 
-	return imgdata.getvalue()
+    return imgdata.getvalue()
         
