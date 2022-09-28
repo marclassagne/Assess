@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 import numpy as np
 import json
 import sys
@@ -232,31 +233,31 @@ def generate_fichier(data):
                     feuille.write_formula(ligne + 1 + i, 10, funcexpopower_excel("J" + str(
                         ligne + 2 + i), "$I$" + str(ligne + 3), "$I$" + str(ligne + 4), "$I$" + str(ligne + 5)))
 
-            # Ensuite on fait le Chart ! (le diagramme)
-            chart5 = classeur.add_chart({'type': 'scatter',
-                                        'subtype': 'smooth'})
+            # # Ensuite on fait le Chart ! (le diagramme)
+            # chart5 = classeur.add_chart({'type': 'scatter',
+            #                             'subtype': 'smooth'})
 
-            # Configure the first series.
-            chart5.add_series({
-                            'name':       utility,
-                            'categories': '=\'' + monAttribut['name'] + '\'' + '!$J$' + str(ligne + 2) + ':$J$' + str(ligne + 12),
-                            'values':     '=\'' + monAttribut['name'] + '\'' + '!$K$' + str(ligne + 2) + ':$K$' + str(ligne + 12),
+            # # Configure the first series.
+            # chart5.add_series({
+            #                 'name':       utility,
+            #                 'categories': '=\'' + monAttribut['name'] + '\'' + '!$J$' + str(ligne + 2) + ':$J$' + str(ligne + 12),
+            #                 'values':     '=\'' + monAttribut['name'] + '\'' + '!$K$' + str(ligne + 2) + ':$K$' + str(ligne + 12),
 
-                            })
+            #                 })
 
-            # Add a chart title and some axis labels.
-            chart5.set_title({'name': 'Utility Function'})
+            # # Add a chart title and some axis labels.
+            # chart5.set_title({'name': 'Utility Function'})
 
-            # Set an Excel chart style.
-            chart5.set_style(4)
-            chart5.set_x_axis({
-                'min': monAttribut['val_min'],
-                'max': monAttribut['val_max']
-            })
+            # # Set an Excel chart style.
+            # chart5.set_style(4)
+            # chart5.set_x_axis({
+            #     'min': monAttribut['val_min'],
+            #     'max': monAttribut['val_max']
+            # })
 
-            # Insert the chart into the worksheet (with an offset).
-            feuille.insert_chart('L' + str(1 + ligne),
-                                chart5, {'x_offset': 35, 'y_offset': 10})
+            # # Insert the chart into the worksheet (with an offset).
+            # feuille.insert_chart('L' + str(1 + ligne),
+            #                     chart5, {'x_offset': 35, 'y_offset': 10})
 
             ligne += 15
 
@@ -556,31 +557,31 @@ def generate_fichier_with_specification(data):
                     feuille.write_formula(ligne + 1 + i, 10, funcexpopower_excel("J" + str(
                         ligne + 2 + i), "$I$" + str(ligne + 3), "$I$" + str(ligne + 4), "$I$" + str(ligne + 5)))
 
-            # Ensuite on fait le Chart ! (le diagramme)
-            chart5 = classeur.add_chart({'type': 'scatter',
-                                         'subtype': 'smooth'})
+            # # Ensuite on fait le Chart ! (le diagramme)
+            # chart5 = classeur.add_chart({'type': 'scatter',
+            #                              'subtype': 'smooth'})
 
-            # Configure the first series.
-            chart5.add_series({
-                              'name':       utility['type'],
-                              'categories': '=' + monAttribut['name'] + '!$J$' + str(ligne + 2) + ':$J$' + str(ligne + 12),
-                              'values':     '=' + monAttribut['name'] + '!$K$' + str(ligne + 2) + ':$K$' + str(ligne + 12),
+            # # Configure the first series.
+            # chart5.add_series({
+            #                   'name':       utility['type'],
+            #                   'categories': '=' + monAttribut['name'] + '!$J$' + str(ligne + 2) + ':$J$' + str(ligne + 12),
+            #                   'values':     '=' + monAttribut['name'] + '!$K$' + str(ligne + 2) + ':$K$' + str(ligne + 12),
 
-                              })
+            #                   })
 
-            # Add a chart title and some axis labels.
-            chart5.set_title({'name': 'Utility Function'})
+            # # Add a chart title and some axis labels.
+            # chart5.set_title({'name': 'Utility Function'})
 
-            # Set an Excel chart style.
-            chart5.set_style(4)
-            chart5.set_x_axis({
-                'min': monAttribut['val_min'],
-                'max': monAttribut['val_max']
-            })
+            # # Set an Excel chart style.
+            # chart5.set_style(4)
+            # chart5.set_x_axis({
+            #     'min': monAttribut['val_min'],
+            #     'max': monAttribut['val_max']
+            # })
 
-            # Insert the chart into the worksheet (with an offset).
-            feuille.insert_chart('L' + str(1 + ligne),
-                                 chart5, {'x_offset': 35, 'y_offset': 10})
+            # # Insert the chart into the worksheet (with an offset).
+            # feuille.insert_chart('L' + str(1 + ligne),
+            #                      chart5, {'x_offset': 35, 'y_offset': 10})
 
             ligne += 15
 

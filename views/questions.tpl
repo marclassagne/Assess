@@ -209,7 +209,7 @@
 		
 		(function(_i) {
 			if (assess_session.attributes[_i].type == "Quantitative"){
-				if (assess_session.attributes[_i].checked){
+				//if (assess_session.attributes[_i].checked){
 					var monAttribut = assess_session.attributes[_i]
 					
 					var json_2_send = {"type": "calc_util_multi", "points":[]},
@@ -259,7 +259,7 @@
 							});
 						});
 					}; };
-				};
+				//};
 			};
 			})(i);
 		};
@@ -454,9 +454,11 @@
 					});
 				})()
 			}
+
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////// CE METHOD ////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			else if (method == 'CE_Constant_Prob') {
 				(function() {
 					// VARIABLES
@@ -561,9 +563,11 @@
 					});
 				})()
 			}
+
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////// CEPV METHOD ////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			else if (method == 'CE_Variable_Prob') {
 				(function() {
 					// VARIABLES
@@ -595,7 +599,7 @@
 					arbre_cepv.display();
 					arbre_cepv.update();
 					// we add the choice button
-                                        $('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-outline-dark" id="gain">Certain gain</button><button type="button" class="btn btn-outline-dark" id="lottery">Lottery</button></div>')
+                    $('#trees').append('<div class=choice style="text-align: center;"><p>Which option do you prefer?</p><button type="button" class="btn btn-outline-dark" id="gain">Certain gain</button><button type="button" class="btn btn-outline-dark" id="lottery">Lottery</button></div>')
 					
 					function utility_finder(gain) {
 						var points = assess_session.attributes[indice].questionnaire.points;
@@ -1640,7 +1644,7 @@
 						$('#functions').show().empty();
 						$('#fonction_choisie').show().empty();
 						
-						$('#graph_choisi'+indice).show().empty();
+						//$('#graph_choisi'+indice).show().empty();
 						
 						var h =data['data'];
 						assess_session.attributes[indice].pts = h[Number(this.value)];

@@ -236,13 +236,15 @@ def multipoints(liste_cord):
         liste_dictionnaires[0]['points'] = [1]
         liste_dictionnaires[0]['coord'] = liste_cord
         liste_dictionnaires[0] = regressions(
-            liste_dictionnaires[0]['coord'], dictionnaire=liste_dictionnaires[0])
+                                             liste_dictionnaires[0]['coord'],
+                                             dictionnaire=liste_dictionnaires[0])
     elif len(liste_cord) == 4:
         liste_dictionnaires = [{}, {}, {}]
         liste_dictionnaires[0]['points'] = [1, 2]
         liste_dictionnaires[0]['coord'] = liste_cord
         liste_dictionnaires[0] = regressions(
-            liste_dictionnaires[0]['coord'], dictionnaire=liste_dictionnaires[0])
+                                             liste_dictionnaires[0]['coord'],
+                                             dictionnaire=liste_dictionnaires[0])
         liste_dictionnaires[1]['points'] = [1]
         liste_dictionnaires[1]['coord'] = [liste_cord[0]] + liste_cord[2:]
         liste_dictionnaires[1] = regressions(
