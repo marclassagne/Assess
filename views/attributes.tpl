@@ -122,9 +122,9 @@ function verifierCaracteres(event) {
 	}
 			
 };
-$("#quantiname").append('<input type="text" class="form-control" id="att_name_quanti" placeholder="Name" onkeypress="verifierCaracteres(event); return false;" autocomplete="off" pattern="[a-z]{4,8}" />');
+$("#quantiname").append('<input type="text" class="form-control" id="att_name_quanti" placeholder="Name" spellcheck="false" onkeypress="verifierCaracteres(event); return false;" autocomplete="off" pattern="[a-z]{4,8}" />');
 $("#quantiname").append('<p style="font-size:10px;"> Use only alphanumerical chars (non case sensitive)</p>');
-$("#qualiname").append('<input type="text" class="form-control" id="att_name_quali" placeholder="Name" onkeypress="verifierCaracteres(event); return false;" autocomplete="off"  />');
+$("#qualiname").append('<input type="text" class="form-control" id="att_name_quali" placeholder="Name" spellcheck="false" onkeypress="verifierCaracteres(event); return false;" autocomplete="off"  />');
 $("#qualiname").append('<p style="font-size:10px;"> Use only alphanumerical chars (non case sensitive)</p>');
 /////////////////////////////////////////////////////////////////////////////////////////
 // Fonctions pour ajouter/supprimer des zones de texte pour les valeurs intermédiaires //
