@@ -3,24 +3,29 @@
 <h2>Former students:</h2>
 <ul>
     <li>Adnane Tebaa</li>
+    <li>Adrien Le Page</li>
     <li>Alexandre Cochennec</li>
     <li>Amine Bouattour </li>
     <li>Anis Chagar Mohamed </li>
     <li>Antoine Normand</li>
+    <li>Antonio Hernandez</li>
     <li>Arnaud Maranges</li>
     <li>Assatou Diallo</li>
     <li>Baptiste Mathae</li>
     <li>Ben Weining</li>
     <li>Blaise Petit</li>
+    <li>Camille Olders</li>
     <li>Chaimaà Charaf </li>
     <li>Charles Chastel</li>
     <li>Chen Jianqiang</li>
     <li>Clara Fulchignoni</li>
+    <li>Cristian Sanchez</li>
     <li>Etienne Verbrugghe</li>
     <li>François Bracchi</li>
     <li>Guillaume Clotault</li>
     <li>Hanen Fehli</li>
     <li>Ismail Assila </li>
+    <li>Javier Beltran</li>
     <li>Jean Auclair</li>
     <li>João Paulo Lima Mota Da Silva </li>
     <li>Julien Blanchard</li>
