@@ -780,6 +780,9 @@ $(function () {
                 // VARIABLES
                 var min_interval = val_min;
                 var max_interval = val_max;
+                // here is an initial value to avoid the page stops.
+                // the rest after that for the reverse mode is failing when saving the values
+                var p = 0.25;
 
                 if (
                     Object.keys(
@@ -806,23 +809,23 @@ $(function () {
                     Object.keys(
                         assess_session.attributes[indice].questionnaire.points
                     ).length == 0 &&
-                    assess_session.attributes[indice].mode == "reversed"
+                    assess_session.attributes[indice].mode == "Reversed"
                 ) {
-                    p = 0.25;
+                    p = 0.75;
                 } else if (
                     Object.keys(
                         assess_session.attributes[indice].questionnaire.points
                     ).length == 1 &&
-                    assess_session.attributes[indice].mode == "reversed"
+                    assess_session.attributes[indice].mode == "Reversed"
                 ) {
                     p = 0.5;
                 } else if (
                     Object.keys(
                         assess_session.attributes[indice].questionnaire.points
                     ).length == 2 &&
-                    assess_session.attributes[indice].mode == "reversed"
+                    assess_session.attributes[indice].mode == "Reversed"
                 ) {
-                    p = 0.75;
+                    p = 0.25;
                 }
 
                 console.log(p);

@@ -62,6 +62,7 @@
 <script src="{{ get_url('static', path='js/tree.js') }}"></script>
 
 <script src="{{ get_url('static', path='js/questions.js') }}"></script>
+
 <!-- Library to copy into clipboard -->
 <script src="{{ get_url('static', path='js/clipboard.min.js') }}"></script>
 <style>
