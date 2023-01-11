@@ -124,7 +124,6 @@
 				if (attribute.questionnaire.number > 0) {
 					if (attribute.questionnaire.number === attribute.val_med.length) {
 						text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
-						text_table += '<button type="button" class="btn btn-outline-dark btn-xs" id="excel' + i +'">export to Excel</button></td>';
 					}
 					
 					else {
@@ -135,20 +134,18 @@
 				} else {
 					text_table += '<td>No assessment yet ';
 				};
+				text_table += '<button type="button" class="btn btn-outline-dark btn-xs" id="excel' + i +'">export to Excel</button></td>';
 				
 			} else {
 				if (attribute.questionnaire.number > 0) {
-					if (attribute.questionnaire.number === attribute.val_med.length) {
-						//text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs calc_util_quanti" id="u_' + attribute.name + '">Utility function</button>';
-						text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs" id="excel_' + i + '">export to Excel</button></td>';
-					}
-					else {
+					if (attribute.questionnaire.number !== attribute.val_med.length) {
 						text_table += '<td>Please assess all the medium values ';
 					}
 
 				} else {
 					text_table += '<td>Please assess all the medium values ';
 				};
+				text_table += '<td><button type="button" class="btn btn-outline-dark btn-xs" id="excel_' + i + '">export to Excel</button></td>';
 			};
 			
 			
@@ -575,16 +572,20 @@
 					var max_interval = val_max;
 					
 					if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 0 && assess_session.attributes[indice].mode == "Normal") {
-						p = 0.25;
-					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 1) {
+						p = 0.75;
+					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 1 && assess_session.attributes[indice].mode == "Normal") {
 						p = 0.5;
 					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 2 && assess_session.attributes[indice].mode == "Normal") {
-		                 		p = 0.75;
-					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 0 && assess_session.attributes[indice].mode == "Reversed") {
-		                 		p = 0.75;
-					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 2 && assess_session.attributes[indice].mode == "Reversed") {
-		                 		p = 0.25;
+		                p = 0.25;
+					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 0 && assess_session.attributes[indice].mode == "reversed") {
+		                p = 0.25;
+					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 1 && assess_session.attributes[indice].mode == "reversed") {
+		                p = 0.50;
+					} else if (Object.keys(assess_session.attributes[indice].questionnaire.points).length == 2 && assess_session.attributes[indice].mode == "reversed") {
+		                p = 0.75;
 					}
+
+					console.log(p)
 
 					var L = [0.75 * (max_interval - min_interval) + min_interval, 0.25 * (max_interval - min_interval) + min_interval];
 					var gain = Math.round(random_proba(L[0], L[1]));
@@ -652,8 +653,8 @@
 								console.log(assess_session.attributes[indice].questionnaire.points)
 								var  point_cepv= Object.keys(assess_session.attributes[indice].questionnaire.points).length-1
 								var  number_cepv = assess_session.attributes[indice].questionnaire.number
-								console.log( point_cepv)
-								console.log( number_cepv)
+								console.log(point_cepv)
+								console.log(number_cepv)
 								if ( point_cepv == number_cepv ){
 									assess_session.attributes[indice].questionnaire.number += 1;
 								}

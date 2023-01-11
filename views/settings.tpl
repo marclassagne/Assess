@@ -12,7 +12,7 @@
     <div class="form-group">
         <label for="decimals_dpl">Number of decimals in DPL and Excel equations</label>
         <input type="number" min=0 step=1 class="form-control form-control-inline" id="decimals_dpl" aria-describedby="decimals_dpl_help" />
-        <small id="decimals_dpl_help" class="form-text text-muted">Type the number of decimals displayed in DPL and Excel equations (default: 8)</small>
+        <small id="decimals_dpl_help" class="form-text text-muted">Type the number of decimals displayed in DPL and Excel equations (default: 3)</small>
     </div>
     <div class="form-group">
         <label for="proba_ce">Probability of CE method</label>
@@ -68,7 +68,7 @@
                 }],
                 "settings": {
                     "decimals_equations": 3,
-                    "decimals_dpl": 8,
+                    "decimals_dpl": 3,
                     "proba_ce": 0.3,
                     "proba_le": 0.3,
                     "language": "english",

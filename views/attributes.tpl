@@ -213,7 +213,7 @@ $(function() {
 			}],
 			"settings": {
 				"decimals_equations": 3,
-				"decimals_dpl": 8,
+				"decimals_dpl": 3,
 				"proba_ce": 0.3,
 				"proba_le": 0.3,
 				"language": "english",
