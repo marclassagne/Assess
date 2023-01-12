@@ -781,7 +781,6 @@ $(function () {
                 var min_interval = val_min;
                 var max_interval = val_max;
                 // here is an initial value to avoid the page stops.
-                // the rest after that for the reverse mode is failing when saving the values
                 var p = 0.25;
 
                 if (
@@ -811,7 +810,7 @@ $(function () {
                     ).length == 0 &&
                     assess_session.attributes[indice].mode == "Reversed"
                 ) {
-                    p = 0.75;
+                    p = 0.25;
                 } else if (
                     Object.keys(
                         assess_session.attributes[indice].questionnaire.points
@@ -825,14 +824,14 @@ $(function () {
                     ).length == 2 &&
                     assess_session.attributes[indice].mode == "Reversed"
                 ) {
-                    p = 0.25;
+                    p = 0.75;
                 }
 
                 console.log(p);
 
                 var L = [
-                    0.75 * (max_interval - min_interval) + min_interval,
-                    0.25 * (max_interval - min_interval) + min_interval,
+                    p * (max_interval - min_interval) + min_interval,
+                    (1-p) * (max_interval - min_interval) + min_interval
                 ];
                 var gain = Math.round(random_proba(L[0], L[1]));
 
@@ -916,8 +915,14 @@ $(function () {
                     );
                     // when the user validate
                     $(".final_validation").click(function () {
+                        
                         var final_gain = parseFloat($("#final_proba").val());
-                        var final_utility = arbre_cepv.questions_proba_haut;
+                        if(assess_session.attributes[indice].mode == "Normal"){
+                            var final_utility = arbre_cepv.questions_proba_haut;
+                        }else if(assess_session.attributes[indice].mode == "Reversed"){
+                            var final_utility = 1 - arbre_cepv.questions_proba_haut;
+                        }
+                        
                         console.log(final_utility);
                         console.log(final_gain);
                         if (
@@ -926,7 +931,7 @@ $(function () {
                             final_gain >=
                                 parseFloat(arbre_cepv.questions_val_min)
                         ) {
-                            // we save it
+                            // we save it. Check the order of appearance of new values.
                             assess_session.attributes[
                                 indice
                             ].questionnaire.points[String(final_gain)] =
