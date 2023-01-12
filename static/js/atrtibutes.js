@@ -422,13 +422,6 @@ $(function () {
             alert("An attribute with the same name already exists");
         } else if (val_min > val_max) {
             alert("Minimum value must be inferior to maximum value");
-        } else if (
-            isThereUnderscore([name, unit], String(val_min), String(val_max)) ==
-            false
-        ) {
-            alert(
-                "Please don't write an underscore ( _ ) in your values.\nBut you can put spaces"
-            );
         } else if (!verifName(name)) {
             alert(
                 "Please use only alphanumerical chars in name (non case sensitive)"
