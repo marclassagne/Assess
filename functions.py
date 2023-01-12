@@ -27,7 +27,7 @@ def funcexpopower(x, a, b, c):             # function for the expo-power regress
 
 # Fonctions parametrees pour avoir U(xmin)=0 et U(xmax)=1
 def funcexp2(x, b, min, max):
-    return (1. / (np.exp(-b * max) - np.exp(-b * min))) * np.exp(-b * x) + (1. / (1 - np.exp(b * (min - max))))
+    return (1. / (np.exp(-b * max, dtype=np.float128) - np.exp(-b * min, dtype=np.float128))) * np.exp(-b * x, dtype=np.float128) + (1. / (1 - np.exp(b * (min - max), dtype=np.float128)))
 
 
 def funcquad2(x, b, min, max):
